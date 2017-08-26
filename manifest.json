@@ -7,31 +7,15 @@
     "16": "public/img/night-king.jpg"
         
 	},
-	"background": {
-		"scripts": [
-			"bower_components/firebase/firebase.js",
-			"background/background.js"
-		]
-	},
-	"content_scripts": [
-		{
-			"matches": ["http://*/*", "https://*/*"],
-			"js": [
-				"content/content.js"
-	
-			],
-			"run_at": "document_start"
-		}
-	],
+
+
 	"permissions": [
 		"tabs", "http://*/*", "activeTab", "storage", "debugger", "contextMenus"
 	],
-	"web_accessible_resources": [
 
-	],
-	"content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com 'unsafe-eval'; object-src 'self'",
 	"browser_action": {
 		"default_title": "Spoilers Suck",
-		"default_popup": "public/popup.html"
+		"default_popup": "public/popup.html",
+        "default_icon": "public/img/calendar.png"
 	}
 }
