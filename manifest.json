@@ -1,0 +1,37 @@
+{
+	"name": "Spoilers Suck",
+	"description": "Don't let your dank friends spoil your favourite shows",
+	"version": "1.0",
+	"manifest_version": 2,
+	"icons": {
+    "16": "public/img/night-king.jpg"
+        
+	},
+	"background": {
+		"scripts": [
+			"bower_components/firebase/firebase.js",
+			"background/background.js"
+		]
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://*/*", "https://*/*"],
+			"js": [
+				"content/content.js"
+	
+			],
+			"run_at": "document_start"
+		}
+	],
+	"permissions": [
+		"tabs", "http://*/*", "activeTab", "storage", "debugger", "contextMenus"
+	],
+	"web_accessible_resources": [
+
+	],
+	"content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com 'unsafe-eval'; object-src 'self'",
+	"browser_action": {
+		"default_title": "Spoilers Suck",
+		"default_popup": "public/popup.html"
+	}
+}
