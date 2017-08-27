@@ -78,3 +78,9 @@
 .suits:hover .check {
   display: inline;
 }
+
+.got:focus {
+  opacity: 0.5;
+  filter: alpha(opacity=40); /* msie */
+  background-color: #000;
+}
