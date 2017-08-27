@@ -19,7 +19,7 @@ def text():
         print json.dumps(data, indent=4, separators=(',', ': '))
         text = data["content"]
         should_censor = TextTest.compare_text(text)
-        return json.dumps({"should_censor": should_censor}), 200
+        return jsonify(json.dumps({"should_censor": should_censor})), 200
 
 @app.route('/img', methods=["POST"])
 def img():
