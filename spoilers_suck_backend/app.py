@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
 import json
-from flask_socketio import SocketIO
+
 
 from lib.text_test import TextTest
+from lib.img_test import recognize_face
 
 app = Flask(__name__)
 
@@ -20,7 +21,15 @@ def text():
         should_censor = TextTest.compare_text(text)
         return json.dumps({"should_censor": should_censor}), 200
 
+@app.route('/img', methods=["POST"])
+def img():
+    print "test img route"
+    if request.is_json:
+        data = request.get_json()
+        print json.dumps(data, indent=4, separators=(',',': '))
+        img_url = data["url"]
 
+        print recognize_face(url='img_url', gallery_name='1')
 
 
 if __name__ == '__main__':
