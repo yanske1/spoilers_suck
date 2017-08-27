@@ -28,8 +28,9 @@ def img():
         data = request.get_json()
         print json.dumps(data, indent=4, separators=(',',': '))
         img_url = data["url"]
+        result = recognize_face(url='img_url', gallery_name='1')
 
-        return recognize_face(url='img_url', gallery_name='1')
+        return json.dumps(result), 200, {'Content-Type': 'application/json'}
 
 
 if __name__ == '__main__':
