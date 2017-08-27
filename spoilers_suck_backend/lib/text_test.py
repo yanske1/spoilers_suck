@@ -11,10 +11,20 @@ import store
 
 class TextTest:
 
-    __entities = {}
+    def __init__(self, show_name, seasons):
+        print 'Initializing TextTest for %s' % show_name
+        self.name = show_name
+        self.entities = TextTest.load_keywords(show_name)
+        print 'loaded %d entities from file' % len(self.entities)
+        if len(self.entities) <= 0:
+            TextTest.generate_keywords(show_name, seasons, self.entities)
+    
+    def test_content(self, content):
+        return TextTest.compare_sentence(content, self.entities)
+        
 
     @staticmethod
-    def entities_text(text, ent_dict):
+    def entities_text(text, ent_dict, show_name):
         """Detects entities in the text."""
         client = language.LanguageServiceClient()
 
@@ -58,7 +68,7 @@ class TextTest:
                 if not entity.name.lower() in ent_dict or ent_dict[entity.name.lower()] < weight:
                     ent_dict[entity.name.lower()] = weight
 
-        ent_dict['game of thrones'] = 1
+        ent_dict[show_name] = 1
 
     @staticmethod
     def compare_sentence(text, model):
@@ -99,23 +109,18 @@ class TextTest:
             return False
 
     @staticmethod
-    def generate_keywords():
+    def generate_keywords(show_name, seasons, ent_dict):
         print "generating keywords"
-        for i in range(1, 8):
-            f = open ('S'+str(i)+'.txt', 'r')
-            TextTest.entities_text(f.read(), TextTest.__entities)
+        for i in range(seasons):
+            f = open ('S'+str(i+1)+'.txt', 'r')
+            TextTest.entities_text(f.read(), ent_dict, show_name)
         
-        store.save_to_file('game_of_thrones', TextTest.__entities)
+        store.save_to_file(show_name, ent_dict)
     
     @staticmethod
-    def load_keywords():
+    def load_keywords(show_name):
         print "loading keywords"
-        save_data = store.load_from_file('game_of_thrones')
-        TextTest.__entities = save_data["entities"]
+        save_data = store.load_from_file(show_name)
+        return save_data["entities"]
 
-    @staticmethod
-    def compare_text(text):
-        if len(TextTest.__entities) == 0:
-            TextTest.generate_keywords()
-        return TextTest.compare_sentence(text, TextTest.__entities)
     

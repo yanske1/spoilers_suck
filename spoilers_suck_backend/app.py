@@ -4,8 +4,25 @@ import json
 
 from lib.text_test import TextTest
 from lib.img_test import recognize_face
+from lib.shows import Show
+
+show_map = {}
+
+class CheckInit(object):
+    """Simple WSGI middleware"""
+    
+    def __init__(self, app):
+        self.app = app
+    def __call__(self, environ, start_response):
+        global show_map
+        print "check init middleware"
+        if len(show_map) == 0:
+            show_map = Show.initializeShows()
+        return self.app(environ, start_response)
 
 app = Flask(__name__)
+
+app.wsgi_app = CheckInit(app.wsgi_app)
 
 @app.route('/')
 def index():
@@ -18,7 +35,7 @@ def text():
         data = request.get_json()
         print json.dumps(data, indent=4, separators=(',', ': '))
         text = data["content"]
-        should_censor = TextTest.compare_text(text)
+        should_censor = show_map['game_of_thrones'].text_tester.test_content(text)
         return json.dumps({"should_censor": should_censor}), 200, {'Content-Type': 'application/json'}
 
 @app.route('/img', methods=["POST"])
@@ -41,7 +58,4 @@ def img():
 
 if __name__ == '__main__':
     print "app started"
-    print "generating keywords"
-    TextTest.generate_keywords()
-    TextTest.load_keywords()
     app.run()

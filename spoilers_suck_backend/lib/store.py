@@ -10,6 +10,5 @@ def save_to_file(show, entities):
 def load_from_file(show):
     with open('storage/%s.json' % show, 'r') as file:
         data = json.load(file)
-        print json.dumps(data, indent=4, separators=(',', ': '))
         return data
     
