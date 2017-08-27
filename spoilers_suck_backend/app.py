@@ -24,5 +24,8 @@ def text():
 
 
 if __name__ == '__main__':
+    print "app started"
+    print "generating keywords"
+    TextTest.generate_keywords()
     TextTest.load_keywords()
     app.run()
