@@ -7,9 +7,9 @@
 
 
 	"permissions": [
-		"activeTab", "tabs"
+		"activeTab", "tabs", "storage"
 	],
-	
+
     "background": {
         "scripts": ["background/background.js"],
         "persistent": true
@@ -35,7 +35,8 @@
             ],
             "js": [
                 "public/scripts/content.js"
-            ]        }
+			]        
+		}
     ]
 
 }
