@@ -103,7 +103,7 @@ class TextTest:
         print "generating keywords"
         for i in range(1, 8):
             f = open ('S'+str(i)+'.txt', 'r')
-            entities_text(f.read(), TextTest.__entities)
+            TextTest.entities_text(f.read(), TextTest.__entities)
         
         store.save_to_file('game_of_thrones', entities)
     
