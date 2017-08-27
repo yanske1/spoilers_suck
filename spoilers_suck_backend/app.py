@@ -17,7 +17,10 @@ class CheckInit(object):
         global show_map
         print "check init middleware"
         if len(show_map) == 0:
+            "no shows initialized; initializing:"
             show_map = Show.initializeShows()
+        else:
+            "shows already initialized, continuing to correct route"
         return self.app(environ, start_response)
 
 app = Flask(__name__)
