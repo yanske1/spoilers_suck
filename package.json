@@ -4,7 +4,7 @@
   "description": "We hate spoilers",
   "main": "scripts.js",
   "repository": "https://github.com/mokaixu/spoilers_suck.git",
-  "author": "mokaixu <mokaixu@gmail.com>",
+  "author": "yan ke, eric qiu, monica xu",
   "license": "MIT",
   "dependencies": {
     "jquery": "^3.2.1"
