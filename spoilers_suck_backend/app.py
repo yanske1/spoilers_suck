@@ -17,10 +17,10 @@ class CheckInit(object):
         global show_map
         print "check init middleware"
         if len(show_map) == 0:
-            "no shows initialized; initializing:"
+            print "no shows initialized; initializing:"
             show_map = Show.initializeShows()
         else:
-            "shows already initialized, continuing to correct route"
+            print "shows already initialized, continuing to correct route"
         return self.app(environ, start_response)
 
 app = Flask(__name__)
@@ -32,13 +32,14 @@ def index():
     return "Hello world, spoilers suck."
 
 @app.route('/text', methods=["POST"])
-def text():
-    print "text test route"
+@app.route('/text/<show_name>', methods=["POST"])
+def text(show_name='game_of_thrones'):
+    print "text test route: %s" % show_name
     if request.is_json:
         data = request.get_json()
         print json.dumps(data, indent=4, separators=(',', ': '))
         text = data["content"]
-        should_censor = show_map['game_of_thrones'].text_tester.test_content(text)
+        should_censor = show_map[show_name].text_tester.test_content(text)
         return json.dumps({"should_censor": should_censor}), 200, {'Content-Type': 'application/json'}
 
 @app.route('/img', methods=["POST"])
