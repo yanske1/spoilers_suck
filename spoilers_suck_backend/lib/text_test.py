@@ -105,7 +105,7 @@ class TextTest:
             f = open ('S'+str(i)+'.txt', 'r')
             TextTest.entities_text(f.read(), TextTest.__entities)
         
-        store.save_to_file('game_of_thrones', entities)
+        store.save_to_file('game_of_thrones', TextTest.__entities)
     
     @staticmethod
     def load_keywords():
