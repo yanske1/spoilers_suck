@@ -2,8 +2,9 @@
 
 $(document).ready(function() {
     $('#view-source').click(function() {
-    chrome.tabs.executeScript({
-    code: 'document.body.style.backgroundColor="red"'
+        
+        // load intensive background script on event
+    chrome.tabs.executeScript(null, { file: "background.js"
   })
     console.log("hello");
 })
