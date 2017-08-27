@@ -13,12 +13,17 @@
         "scripts": [
 			"background/background.js"
 		]
-        
-    },
+	},
+
+	"icons": {  
+		"16": "public/img/icon_16.png",
+		"48": "public/img/icon_48.png",
+		"128": "public/img/icon_128.png" 
+	},
 
 	"browser_action": {
 		"default_title": "Spoilers Suck",
 		"default_popup": "public/popup.html",
-        "default_icon": "public/img/calendar.png"
+        "default_icon": "public/img/icon_48.png"
 	}
 }
