@@ -8,10 +8,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Hello world, spoilers suck."\
+    return "Hello world, spoilers suck."
 
 @app.route('/text', methods=["POST"])
 def text():
+    print "text test route"
     if request.is_json:
         data = request.get_json()
         print json.dumps(data, indent=4, separators=(',', ': '))
