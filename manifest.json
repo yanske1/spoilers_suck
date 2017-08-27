@@ -7,18 +7,25 @@
 
 
 	"permissions": [
-		"tabs", "activeTab"
+		"activeTab", "tabs"
 	],
     "background": {
-        "scripts": [
-			"background/background.js"
-		]
-        
+        "scripts": ["background/background.js"],
+        "persistent": true
     },
 
 	"browser_action": {
 		"default_title": "Spoilers Suck",
 		"default_popup": "public/popup.html",
         "default_icon": "public/img/calendar.png"
-	}
+	},
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/*"
+            ],
+            "js": [
+                "public/scripts/content.js"
+            ]        }
+    ]
 }

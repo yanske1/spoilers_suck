@@ -1,17 +1,12 @@
-// Attach event listeners to buttons
 
-$(document).ready(function() {
-    $('#view-source').click(function() {
-        
-        // load intensive background script on event
-    chrome.tabs.executeScript(null, { file: "background.js"
-  })
-    console.log("hello");
-})
     
-    
-    
-});
+var button = document.getElementById("view-source");
+button.addEventListener("click", function(tab) {
 
+    console.log('Turning ' + tab.url + ' red!');
+      chrome.tabs.executeScript(null, {file: "content.js"}, function() {
+      });
+
+}, false);
 
 
