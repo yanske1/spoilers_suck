@@ -100,6 +100,7 @@ class TextTest:
 
     @staticmethod
     def generate_keywords():
+        print "generating keywords"
         for i in range(1, 8):
             f = open ('S'+str(i)+'.txt', 'r')
             entities_text(f.read(), TextTest.__entities)
@@ -108,10 +109,13 @@ class TextTest:
     
     @staticmethod
     def load_keywords():
+        print "loading keywords"
         save_data = store.load_from_file('game_of_thrones')
         TextTest.__entities = save_data["entities"]
 
     @staticmethod
     def compare_text(text):
+        if len(TextTest.__entities) == 0:
+            TextTest.generate_keywords()
         return TextTest.compare_sentence(text, TextTest.__entities)
     
