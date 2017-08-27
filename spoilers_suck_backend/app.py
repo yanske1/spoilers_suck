@@ -28,9 +28,15 @@ def img():
         data = request.get_json()
         print json.dumps(data, indent=4, separators=(',',': '))
         img_url = data["url"]
-        result = recognize_face(url='img_url', gallery_name='1')
+        result = recognize_face(url=img_url, gallery_name='1')
 
-        return json.dumps(result), 200, {'Content-Type': 'application/json'}
+        try:
+            if result["images"][0]["transaction"]["status"] == "success":
+                return jsonify({"should_censor": True}), 200, {'Content-Type': 'application/json'}
+        except:
+            pass
+        
+    return jsonify({"should_censor": False}), 200, {'Content-Type': 'application/json'}
 
 
 if __name__ == '__main__':

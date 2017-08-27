@@ -6,14 +6,15 @@ auth_headers = {
         'app_id': '4f9705ff',
         'app_key': 'cb6c0e9a44490714b616a3cb2c0cc803'
     }
-    
+
 gallery_const = '1'
 
 def recognize_face(gallery_name, url = None, file = None, additional_args={}):
+    print url
     payload = build_recognize_payload(gallery_name, url, file,additional_args)
     response = requests.post(base_url+'recognize', json=payload, headers = auth_headers)
     json_response = response.json()
-
+    print json_response
     return json_response
 
 def enroll_face(subject_id, gallery_name, url=None, file = None, base64_image_contents=None, multiple_faces = False, additional_args={}):
