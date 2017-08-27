@@ -41,6 +41,8 @@ def text(show_name='game_of_thrones'):
         text = data["content"]
         should_censor = show_map[show_name].text_tester.test_content(text)
         return json.dumps({"should_censor": should_censor}), 200, {'Content-Type': 'application/json'}
+    else:
+        return jsonify(error="no json provided"), 400
 
 @app.route('/img', methods=["POST"])
 def img():
