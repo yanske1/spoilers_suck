@@ -14,7 +14,7 @@ class TextTest:
     def __init__(self, show_name, seasons):
         print 'Initializing TextTest for %s' % show_name
         self.name = show_name
-        self.entities = TextTest.load_keywords(show_name)
+        self.entities = TextTest.load_keywords(show_name, seasons)
         print 'loaded %d entities from file' % len(self.entities)
         if len(self.entities) <= 0:
             TextTest.generate_keywords(show_name, seasons, self.entities)
@@ -109,18 +109,23 @@ class TextTest:
             return False
 
     @staticmethod
-    def generate_keywords(show_name, seasons, ent_dict):
+    def generate_keywords(show_name, seasons):
+        ent_dict = {}
         print "generating keywords"
         for i in range(seasons):
-            f = open ('S'+str(i+1)+'.txt', 'r')
+            f = open ('storage/text/'+show_name+'/S'+str(i+1)+'.txt', 'r')
             TextTest.entities_text(f.read(), ent_dict, show_name)
         
         store.save_to_file(show_name, ent_dict)
+        return ent_dict
     
     @staticmethod
-    def load_keywords(show_name):
+    def load_keywords(show_name, seasons):
         print "loading keywords"
         save_data = store.load_from_file(show_name)
-        return save_data["entities"]
+        if save_data != None:
+            return save_data["entities"]
+        else:
+            return TextTest.generate_keywords(show_name, seasons)
 
     
