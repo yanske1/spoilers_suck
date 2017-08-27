@@ -1,5 +1,7 @@
 const API_URL = "https://spoilers-suck.herokuapp.com";
 
+debugger;
+
 var elements = document.getElementsByTagName('*'); // try to remove img
 
 for (var i = 0; i < elements.length; i++) {
@@ -16,7 +18,7 @@ for (var i = 0; i < elements.length; i++) {
                 
                 // might need node.parentElement
                 node.style.visibility =  "hidden";
-			     node.addEventListener("click", makeVisible, false);
+			    node.addEventListener("click", makeVisible, false);
                 
                 // they added this to a hashmap with an index, so that when a user clicks on it again, it can keep track and unblur later
             }
@@ -28,7 +30,9 @@ for (var i = 0; i < elements.length; i++) {
 
 
         }
-        else if (node.nodeT)
+        else if (node.nodeT) {
+
+        }
     }
 }
 /** The following is fo rreference
@@ -55,22 +59,18 @@ for (var i = 0, l = images.length; i < l; i++) {
 }
 
 function shouldFilterText(divText) {
-    $.ajax({
-		url: API_URL + '/text',
-		type:'GET',
-        data: {
-            'content': divText
-        }
-		headers:{
-            'Content-Type':'application/json',
-        },
-		success: function(data) {
-			return data.should_censor; // i hate javascript why is this asyncronous
-		},
-		error: function() {
-            console.log("Error making Get request");
-        }
-	});
+    return fetch(API_URL + '/text', {
+        method: 'POST',
+        body: JSON.stringify({ abc: "Jon Snow" })
+    })
+        .then((res) => (res.json()))
+        .then((json) => {
+            console.log(json);
+            return json.should_censor;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
     
 }
 
@@ -84,7 +84,8 @@ function shouldFilterImage(imgUrl){
 		type:'GET',
         data: {
             'url': imgUrl
-        }
+        },
+        dataType: 'json',
 		headers:{
             'Content-Type':'application/json',
         },

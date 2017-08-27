@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    alert("working");
+});
+
 var once = false;
 window.addEventListener("load", function () {
     if ( once == true ) { return; }
