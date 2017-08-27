@@ -9,7 +9,7 @@ from lib.shows import Show
 show_map = {}
 
 class CheckInit(object):
-    """Simple WSGI middleware"""
+    """Simple WSGI middleware to check if shows and entities have been initialized yet"""
     
     def __init__(self, app):
         self.app = app
