@@ -7,7 +7,7 @@
 
 
 	"permissions": [
-		"activeTab", "tabs", "storage"
+		"activeTab", "tabs", "storage", "https://spoilers-suck.herokuapp.com/"
 	],
 
     "background": {
@@ -34,8 +34,12 @@
                 "*://*/*"
             ],
             "js": [
-                "public/scripts/content.js"
-			]        
+				"public/scripts/DOM.js",
+				"public/scripts/censor.js",
+				"public/scripts/content-2.js",
+				"jquery-3.2.1.min.js"
+			],
+			"run_at": "document_start"
 		}
     ]
 
