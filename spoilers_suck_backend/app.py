@@ -29,7 +29,7 @@ def img():
         print json.dumps(data, indent=4, separators=(',',': '))
         img_url = data["url"]
 
-        print recognize_face(url='img_url', gallery_name='1')
+        return recognize_face(url='img_url', gallery_name='1')
 
 
 if __name__ == '__main__':
