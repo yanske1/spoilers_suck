@@ -1,5 +1,2 @@
-# spoilers_suck
-hack the 6ix
-
-# Presentation Slides
-[Google Slides](https://docs.google.com/presentation/d/1g06bZPdpmXLCZlF1O5wbIZGKzGmRAaFMTvVD0G2JBCU/edit?usp=sharing)
+# Spoilers Suck!
+Spoilers suck is a hack we made for Hack the 6ix, and it is a Chrome extension that filters out Game of Thrones spoilers! It is built with Javascript on the front-end, that traverses the DOM tree and makes RESTful API requests to our Flask server that is able to predict if a  text is relevant to the TV show, or if an image contains a character from the TV show. If we detect that a text or image is a spoiler, we'll blur the element out.
